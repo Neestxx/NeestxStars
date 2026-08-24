@@ -1,3 +1,0 @@
-start_message_pic = r'https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-8748-620a-975d-e1ccbf3e9528/raw?se=2025-07-29T19%3A11%3A31Z&sp=r&sv=2024-08-04&sr=b&scid=b481ed8c-44b7-551e-be08-cf9937c50e8c&skoid=82a3371f-2f6c-4f81-8a78-2701b362559b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-29T07%3A56%3A22Z&ske=2025-07-30T07%3A56%3A22Z&sks=b&skv=2024-08-04&sig=/kkfK4k6af2Cs7jyAc%2BX5%2BaKDceX4WblAplATEdrvcg%3D'
-buying_picture = r'https://static41.tgcnt.ru/posts/_0/d4/d4760b6bba6283ebec65c199f50f08ac.jpg'
-url_for_rules_app = 'https://telegra.ph/Pravila-pokupki-zvezd-Startelebot-05-16'
