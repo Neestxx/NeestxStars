@@ -36,7 +36,7 @@ ADMIN_STATES = {
 }
 
 
-SUPPORT_CHAT_ID = '-1002549120267'
+SUPPORT_CHAT_ID = 'id чата поддержки в тг'
 
 con = sqlite3.connect('StarBotClient.db')
 cur = con.cursor()
@@ -71,7 +71,7 @@ async def start(message: types.Message):
 @bot.callback_query_handler(func=lambda callback: callback.data == 'success_subscribe')
 async def check_subscribe(callback: types.CallbackQuery):
     try:
-        is_member = await bot.get_chat_member('-1002709568442', user_id=callback.from_user.id)
+        is_member = await bot.get_chat_member('чат куда надо подписаться', user_id=callback.from_user.id)
 
         if is_member.status in ['member', 'administrator', 'creator']:
             await bot.answer_callback_query(callback_query_id=callback.id, text='✅Вы успешно прошли проверку')
@@ -420,7 +420,7 @@ async def inline_support(call: types.CallbackQuery):
 
 @bot.message_handler(func=lambda message: cur.execute(f'SELECT state FROM Clients WHERE user_id = {str(message.from_user.id)}').fetchone()[0] == USER_STATES["AWAITING_SUPPORT"] and message.text != '/cancel')
 async def support_message(message: types.Message):
-    await bot.send_message(SUPPORT_CHAT_ID, f'Зарегестрировано новое обращение (@Neestxx):\nЮзернейм пользователя: <code>{"@" + message.from_user.username if message.from_user.username else "tg://user?id=" + str(message.from_user.id)}</code>\n<code>Текст обращения: {message.text}</code>', parse_mode="HTML")
+    await bot.send_message(SUPPORT_CHAT_ID, f'Зарегестрировано новое обращение :\nЮзернейм пользователя: <code>{"@" + message.from_user.username if message.from_user.username else "tg://user?id=" + str(message.from_user.id)}</code>\n<code>Текст обращения: {message.text}</code>', parse_mode="HTML")
     cur.execute(f'''UPDATE Clients
                     SET state = "{USER_STATES["DEFAULT_STATE"]}"
                     WHERE user_id = "{message.from_user.id}"
@@ -500,7 +500,7 @@ async def create_promo(message: types.Message):
                         ''')
         con.commit()
     else:
-        await bot.send_message(message.chat.id, '<b>У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к <code>@Neestxx</code></b>', parse_mode="HTML")
+        await bot.send_message(message.chat.id, '<b>У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к <code></code></b>', parse_mode="HTML")
 
 @bot.message_handler(func=lambda message: cur.execute(f'SELECT state FROM Clients WHERE user_id = {message.from_user.id}').fetchone()[0] == 'create_promo')
 async def creating_promo(message: types.Message):
@@ -524,7 +524,7 @@ async def set_course(message: types.Message):
     if message.from_user.id in is_admin:
         await bot.send_message(message.chat.id, 'Пожалуйста, выберите валюту', reply_markup=keyboard_for_course)
     else:
-        await bot.send_message(message.chat.id, 'У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к @Neestxx')
+        await bot.send_message(message.chat.id, 'У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к ')
 
 @bot.callback_query_handler(func=lambda call: call.data in ['change_usdt_course', 'change_ton_course', 'change_star_course'])
 async def change_course(call: types.CallbackQuery):
@@ -606,7 +606,7 @@ async def mailing(message: types.Message):
         con.commit()
         await bot.send_message(message.chat.id, '<b>👥Пожалуйста, введите текст рассылки ниже\n❗❗Внимание, рассылка будет отправлена всем пользователям, зарегистрированным в боте</b>', parse_mode="HTML")
     else:
-        await bot.send_message(message.chat.id, '<b>У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к <code>@Neestxx</code></b>', parse_mode="HTML")
+        await bot.send_message(message.chat.id, '<b>У вас нет доступа к данной команде. Если вы считаете, что это ошибка, обратитесь к <code></code></b>', parse_mode="HTML")
 
 @bot.message_handler(func=lambda message: cur.execute(f'SELECT state FROM Clients WHERE user_id = "{message.from_user.id}"').fetchone()[0] == ADMIN_STATES["AWAITING_FOR_MAIL"])
 async def start_mailing(message: types.Message):
